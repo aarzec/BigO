@@ -93,6 +93,7 @@ log_n = np.log(n) * (max_tiempo / np.log(MAX_TAMANO))
 n_log_n = n * log_n / MAX_TAMANO
 n2 = (n ** 2) * (max_tiempo / (MAX_TAMANO ** 2))
 n3 = (n ** 3) * (max_tiempo / (MAX_TAMANO ** 3))
+_2pow_n = 2 ** n * (max_tiempo / 2 ** MAX_TAMANO)
 lineal = n * (max_tiempo / MAX_TAMANO)
 
 # Establecer a cual se aproxima más
@@ -101,7 +102,8 @@ aproximaciones = {
     'O(log(n))': sum(abs(tiempo_registro - log_n)),
     'O(n log(n))': sum(abs(tiempo_registro - n_log_n)),
     'O(n^2)': sum(abs(tiempo_registro - n2)),
-    'O(n^3)': sum(abs(tiempo_registro - n3))
+    'O(n^3)': sum(abs(tiempo_registro - n3)),
+    'O(2^n)': sum(abs(tiempo_registro - _2pow_n)),
 }
 mejor_aproximacion = min(aproximaciones, key=aproximaciones.get)
 print(f'La mejor aproximación es {mejor_aproximacion}')
@@ -113,6 +115,7 @@ plt.plot(log_n, n, label='O(log(n))')
 plt.plot(n_log_n, n, label='O(n log(n))')
 plt.plot(n2, n, label='O(n^2)')
 plt.plot(n3, n, label='O(n^3)')
+plt.plot(_2pow_n, n, label='O(2^n)')
 # plt.xscale('log')
 plt.ylabel('Tamaño de la entrada')
 plt.xlabel('Tiempo (s)')
